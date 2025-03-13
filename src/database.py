@@ -2,8 +2,10 @@ from collections.abc import AsyncGenerator
 
 from fastapi import Depends
 from fastapi_users.db import SQLAlchemyBaseUserTableUUID, SQLAlchemyUserDatabase
+from fastapi_users_db_sqlalchemy import SQLAlchemyBaseUserTable
+from sqlalchemy import Integer
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
-from sqlalchemy.orm import DeclarativeBase
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 DATABASE_URL = "sqlite+aiosqlite:///./test.db"
 
@@ -12,8 +14,8 @@ class Base(DeclarativeBase):
     pass
 
 
-class User(SQLAlchemyBaseUserTableUUID, Base):
-    pass
+class User(SQLAlchemyBaseUserTable[int], Base):
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
 
 
 engine = create_async_engine(DATABASE_URL)
