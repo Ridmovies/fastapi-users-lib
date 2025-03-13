@@ -6,6 +6,10 @@ from sqlalchemy.orm import declared_attr, Mapped, mapped_column
 
 from src.database import Base, get_async_session
 
+from fastapi_users_db_sqlalchemy.access_token import (
+    SQLAlchemyAccessTokenDatabase,
+)
+
 
 class AccessToken(SQLAlchemyBaseAccessTokenTable[int], Base):
     @declared_attr
