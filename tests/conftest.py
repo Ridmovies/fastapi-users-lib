@@ -3,12 +3,16 @@ from typing import AsyncGenerator
 import pytest_asyncio
 from httpx import AsyncClient, ASGITransport
 
+from src.config import settings
 from src.database import engine, Base
 from src.main import app
 
 
 @pytest_asyncio.fixture(scope="session", autouse=True)
 async def prepare_database():
+    async def prepare_database():
+        if settings.MODE != "TEST":
+            raise Exception
 
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.drop_all)
