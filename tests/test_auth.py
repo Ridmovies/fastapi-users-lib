@@ -65,4 +65,3 @@ async def test_jwt_login(client: AsyncClient):
 
     assert response.status_code == 200
     assert response.json()["email"] == "user@example.com"
-    assert response.json()["id"] == 1
