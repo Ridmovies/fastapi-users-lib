@@ -12,8 +12,16 @@ from src.auth.transport import bearer_transport, cookie_transport
 # )
 
 # jwt_strategy and cookie_transport
+# auth_backend = AuthenticationBackend(
+#     name="jwt",
+#     transport=cookie_transport,
+#     get_strategy=get_jwt_strategy,
+# )
+
+
+# jwt_strategy and bearer_transport
 auth_backend = AuthenticationBackend(
     name="jwt",
-    transport=cookie_transport,
+    transport=bearer_transport,
     get_strategy=get_jwt_strategy,
 )
