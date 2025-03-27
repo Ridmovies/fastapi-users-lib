@@ -1,11 +1,6 @@
 import pytest
 from httpx import AsyncClient
 
-@pytest.mark.asyncio
-async def test_protected_route(client: AsyncClient):
-    response = await client.get("/protected-route")
-    assert response.status_code == 401
-
 
 @pytest.mark.asyncio
 async def test_register_user(client: AsyncClient):

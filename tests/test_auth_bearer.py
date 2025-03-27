@@ -3,9 +3,9 @@ from httpx import AsyncClient
 
 @pytest.mark.asyncio
 async def test_protected_route(client: AsyncClient):
-    response = await client.get("/protected-route")
+    response = await client.get("/users/me")
     assert response.status_code == 401
-
+    assert response.json() == {"detail":"Unauthorized"}
 
 @pytest.mark.asyncio
 async def test_register_user(client: AsyncClient):
@@ -18,12 +18,6 @@ async def test_register_user(client: AsyncClient):
 }
     response = await client.post("/auth/register", json=json_data)
     assert response.status_code == 201
-
-
-@pytest.mark.asyncio
-async def test_protected_route(client: AsyncClient):
-    response = await client.get("/protected-route")
-    assert response.status_code == 401
 
 
 @pytest.mark.asyncio
