@@ -52,9 +52,11 @@ async def test_jwt_login(client: AsyncClient):
 
     # Делаем запрос к защищенному маршруту с токеном в заголовках
     response = await client.get(
-        "/protected-route",
+        "/users/me",
         headers={"Authorization": f"Bearer {access_token}"}
     )
-    assert response.status_code == 200  # Теперь ожидаем успешный ответ
-    # assert response.json()["email"] == "user@example.com"
+    assert response.status_code == 200
+    assert response.json()["email"] == "user@example.com"
+    assert "id" in response.json()
+
 
