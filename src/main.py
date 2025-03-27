@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Depends
 
-from src.auth.auth_router import current_user, auth_router
-from src.database import User
+from src.auth.router import router as auth_router, current_user
+from src.auth.models import User
 
 app = FastAPI()
 app.include_router(auth_router)
